@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    <div class = 'row'><h4></h4></div><br>
+    <div class = 'row'>
+        {% if searched_products %}
+            {% for product in searched_products %}
+            <div class = 'col-md-4 col-lg-4'>
+                <div class="card" style="width: 18rem;">
+                    <img src="{{product.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-title">{{product.name}}</h3>
+                        <h4 class="card-text">${{product.price}}</h4>
+                        <a  class="btn btn-primary addtocart" data-action = 'add' data-product= "{{product.product_id}}">Add to Cart</a>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+      {% else %}
+      <div class = 'row'>
+        <h3 style="padding-bottom: 300px; text-align: center; font-size: 40px; font-weight: 400; margin-top: 50px;">Product Not Available! Check Back Later</h3>
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+  {% endblock %}
