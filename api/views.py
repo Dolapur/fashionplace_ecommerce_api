@@ -1,4 +1,4 @@
-import uuid
+
 from FashionPlace.models import *
 from  .serializers import *
 from rest_framework.response import Response
