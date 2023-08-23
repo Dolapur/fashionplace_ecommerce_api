@@ -23,6 +23,10 @@
       {
         "src": "/(.*)",
         "dest": "Ecommerce/wsgi.py"
+      },
+      {
+        "src": "/image/(.*)",
+        "dest": "static/image/$1"
       }
     ]
   }
