@@ -63,10 +63,10 @@
    The FashionPlace_Ecommerce_api is developed on vercel and the endpoints are stated below
 
    * API Root:
-     https://fashionplace-ecommerce-api-git-main-dolapur.vercel.app/
+      https://fashionplace-ecommerce-api.vercel.app/
 
    * Swagger Ui:
-      https://fashionplace-ecommerce-api-git-main-dolapur.vercel.app/swagger
+      https://fashionplace-ecommerce-api.vercel.app/swagger
 
 # THANKS FOR VISITING
 
