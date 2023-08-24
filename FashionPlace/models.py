@@ -164,7 +164,8 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
     bio = models.TextField()
-    picture = models.ImageField(upload_to = 'img', blank=True, null=True)
+    # picture = models.ImageField(upload_to = 'img', blank=True, null=True)
+    address = models.CharField(max_length=256, default= None, null=True, blank=True)
     
     def __str__(self):
         return self.username
