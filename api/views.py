@@ -356,9 +356,9 @@ class ProfileViewSet(ModelViewSet):
 
         username = request.data["username"]
         bio = request.data["bio"]
-        picture = request.data["picture"]
+        address = request.data["address"]
 
-        profile = Profile.objects.create(user=user, username=username, bio=bio, picture=picture)
+        profile = Profile.objects.create(user=user, username=username, bio=bio, address=address)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
