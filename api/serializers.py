@@ -169,6 +169,6 @@ class UpdateOrderSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["id", "username", 'bio', "picture"]
+        fields = ["id", "username", 'bio', "address"]
 
 
