@@ -6,9 +6,11 @@ cffi==1.15.1
 chardet==3.0.4
 cryptography==41.0.2
 defusedxml==0.7.1
+dj-database-url==2.1.0
 Django==4.2
 django-debug-toolbar==4.0.0
 django-filter==23.2
+django-guest-user==0.5.4
 django-rest-framework-nested==0.0.1
 django-templated-mail==1.1.1
 djangorestframework==3.14.0

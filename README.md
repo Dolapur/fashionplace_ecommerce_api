@@ -1,5 +1,5 @@
 # FashionPlace
-  FashionPlace Ecommerce API is a comprehensive solution for managing an online fashion store. It offers user authentication and profile management, seamless shopping cart handling, efficient order processing, and detailed product management. This API ensures secure authentication with JWT tokens and provides endpoints for essential e-commerce operations.
+  FashionPlace Ecommerce API is a comprehensive solution for managing an online fashion store. It offers user authentication and profile management, seamless shopping cart handling, efficient order processing, and detailed data management. This API ensures secure authentication with JWT tokens and provides endpoints for essential e-commerce operations. Additionally, it guarantees data security and cleanup when a user's profile is deleted, the API takes care of cleaning up the associated data, including their shopping cart, cart items, orders, and order items. This feature ensures that your database remains organized and clutter-free, saving you time and effort.
 
 # Introduction
   Welcome to the FashionPlace Ecommerce API! This API is designed to provide a seamless experience for managing your online fashion store. Below are some key features and information about this API:
@@ -60,7 +60,7 @@
   The FashionPlace_Ecommerce_api is licensed under the MIT License - see the LICENSE file for details.
 
 # Deployments
-   The FashionPlace_Ecommerce_api is developed on vercel and the endpoints are stated below
+   The FashionPlace_Ecommerce_api is deployed on vercel and the endpoints are stated below
 
    * API Root:
       https://fashionplace-ecommerce-api.vercel.app/

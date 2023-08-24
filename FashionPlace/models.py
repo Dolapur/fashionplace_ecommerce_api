@@ -180,6 +180,13 @@ def delete_related_orders(sender, instance, **kwargs):
         order_items.delete()
         order.delete()
 
+    # Delete related cart items and the cart
+    cart = Cart.objects.filter(user=user).first()
+    if cart:
+        cart_items = CartItem.objects.filter(cart=cart)
+        cart_items.delete()
+        cart.delete()
+
     # Delete the associated user's customer
     if user.customer:
         user.customer.delete()
