@@ -82,7 +82,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name =  models.CharField(max_length=100)
-    price = models.FloatField(default=10.55)
+    price = models.IntegerField(default=10)
     image = models.ImageField()
     product_id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
     category = models.ManyToManyField(Category, related_name='products')

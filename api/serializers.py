@@ -59,7 +59,7 @@ class CartItemSerializer(serializers.ModelSerializer):
         fields = ["id", "cart", "product", "quantity", "sub_total"]
         
     def cart_quantity(self, cartitem:CartItem):
-        return format(cartitem.quantity * cartitem.product.price, '.2f')
+        return cartitem.quantity * cartitem.product.price
 
 
 class AddCartItemSerializer(serializers.ModelSerializer):
@@ -115,7 +115,7 @@ class CartSerializer(serializers.ModelSerializer):
     def cart_total(self, cart: Cart):
         items = cart.items.all()
         total = sum([item.quantity * item.product.price for item in items])
-        return format(total, '.2f')
+        return total
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
