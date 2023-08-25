@@ -94,11 +94,13 @@ def delete_related_orders(sender, instance, **kwargs):
         order.delete()
 
     # Delete related cart items and the cart
-    cart = Cart.objects.filter(customer=user.customer).first()
-    if cart:
+    try:
+        cart = Cart.objects.get(profile=instance)
         cart_items = CartItem.objects.filter(cart=cart)
         cart_items.delete()
         cart.delete()
+    except Cart.DoesNotExist:
+        pass
 
     # Delete the associated user's customer
     if user.customer:
@@ -131,8 +133,8 @@ class Product(models.Model):
 
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null = True, blank=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null = True, blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, primary_key=True)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     session_id = models.CharField(max_length=100, null=True, blank=True)
 

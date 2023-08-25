@@ -336,7 +336,7 @@ class ProfileViewSet(ModelViewSet):
         if user.is_staff:
             queryset = Profile.objects.all()
         else:
-            queryset = Profile.objects.filter(customer=user.customer)
+            queryset = Profile.objects.filter(user=user)
 
         serializer = ProfileSerializer(queryset, many=True)
         return Response(serializer.data)
