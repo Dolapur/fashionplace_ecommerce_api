@@ -72,6 +72,41 @@ def CreateCustomer(sender, instance, created, **kwargs):
         customer.save()
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100)
+    bio = models.TextField()
+    # picture = models.ImageField(upload_to = 'img', blank=True, null=True)
+    address = models.CharField(max_length=256, default= None, null=True, blank=True)
+    
+    def __str__(self):
+        return self.username
+
+@receiver(post_delete, sender=Profile)
+def delete_related_orders(sender, instance, **kwargs):
+    user = instance.user
+    
+    # Delete related orders and items for the user's customer
+    orders = Order.objects.filter(owner=user)
+    for order in orders:
+        order_items = OrderItem.objects.filter(order=order)
+        order_items.delete()
+        order.delete()
+
+    # Delete related cart items and the cart
+    cart = Cart.objects.filter(customer=user.customer).first()
+    if cart:
+        cart_items = CartItem.objects.filter(cart=cart)
+        cart_items.delete()
+        cart.delete()
+
+    # Delete the associated user's customer
+    if user.customer:
+        user.customer.delete()
+
+    user.delete()
+
+
 class Category(models.Model):
     name = models.CharField('Categories', max_length=255)
     slug = models.SlugField('Slug', max_length=255, unique=True, blank=True)
@@ -97,6 +132,7 @@ class Product(models.Model):
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null = True, blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, primary_key=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     session_id = models.CharField(max_length=100, null=True, blank=True)
 
@@ -158,38 +194,3 @@ class OrderItem(models.Model):
     
     def __str__(self):
         return self.product.name
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    username = models.CharField(max_length=100)
-    bio = models.TextField()
-    # picture = models.ImageField(upload_to = 'img', blank=True, null=True)
-    address = models.CharField(max_length=256, default= None, null=True, blank=True)
-    
-    def __str__(self):
-        return self.username
-
-@receiver(post_delete, sender=Profile)
-def delete_related_orders(sender, instance, **kwargs):
-    user = instance.user
-    
-    # Delete related orders and items for the user's customer
-    orders = Order.objects.filter(owner=user)
-    for order in orders:
-        order_items = OrderItem.objects.filter(order=order)
-        order_items.delete()
-        order.delete()
-
-    # Delete related cart items and the cart
-    cart = Cart.objects.filter(user=user).first()
-    if cart:
-        cart_items = CartItem.objects.filter(cart=cart)
-        cart_items.delete()
-        cart.delete()
-
-    # Delete the associated user's customer
-    if user.customer:
-        user.customer.delete()
-
-    user.delete()
