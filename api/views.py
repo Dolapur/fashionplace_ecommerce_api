@@ -1,4 +1,3 @@
-
 from FashionPlace.models import *
 from  .serializers import *
 from rest_framework.response import Response
@@ -78,7 +77,7 @@ class ProductViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     filterset_class = ProductFilter
     search_fields = ['name']
     ordering_fields = ['price']
-    pagination_class = PageNumberPagination
+    # pagination_class = PageNumberPagination
 
 
 class CartViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, GenericViewSet):
